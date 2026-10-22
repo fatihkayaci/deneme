@@ -262,3 +262,96 @@ a.pcard:hover{border-color:var(--line-3);transform:translateY(-3px);color:var(--
   .stat{padding:24px 16px}
   .stat b{font-size:38px}
 }
+
+/* ============================================================
+   Rhythm & texture layer (inner pages)
+   ============================================================ */
+
+/* stacking: ambient canvas sits behind main + footer */
+main,.site-foot{position:relative;z-index:1}
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;display:block;width:100%;height:100%}
+
+/* film grain over everything (not on the home story) */
+body:not(.home)::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.045;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:220px 220px}
+
+/* ---------- 1 · light contrast band ---------- */
+.band-light{position:relative;z-index:1;background:#E6EDF3;color:#040814;padding:120px 0;overflow:hidden}
+.band-light.band-tight{padding:56px 0}
+.band-light .bg-layer{background-image:radial-gradient(rgba(4,8,20,.18) 1.2px,transparent 1.8px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,transparent,#000 20%,#000 80%,transparent);mask-image:linear-gradient(180deg,transparent,#000 20%,#000 80%,transparent)}
+.band-light .eyebrow,.band-light .accent{color:#0369A1}
+.band-light .h1,.band-light .h2,.band-light .h3,.band-light b{color:#040814}
+.band-light .lead,.band-light .muted,.band-light p{color:#3D4F66}
+.band-light .cta{background:transparent;border:0;padding:0;overflow:visible}
+.band-light .btn{border-color:rgba(4,8,20,.28);color:#040814}
+.band-light .btn:hover{border-color:#040814;color:#040814}
+.band-light .btn-primary{background:#040814;border-color:#040814;color:#E6EDF3}
+.band-light .btn-primary:hover{background:#0B1B33;border-color:#0B1B33;color:#FFFFFF}
+.band-light .contact-lines a{color:#040814}
+.band-light .contact-lines .k{color:#5B6B82}
+.band-light .stats,.band-light .stat+.stat{border-color:rgba(4,8,20,.14)}
+.band-light .stat b{color:#0369A1}
+.band-light .stat span{color:#3D4F66}
+.band-light .wa-fab{color:#4ADE80}
+
+/* ---------- 2 · tilted project marquee ---------- */
+.marquee{position:relative;width:100vw;margin-left:calc(50% - 50vw);overflow:hidden;padding:56px 0 72px;perspective:1400px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.mq-tilt{width:124vw;margin-left:-12vw;transform:rotateX(10deg) rotateZ(-2deg);transform-origin:50% 50%}
+.marquee-track{display:flex;width:max-content;animation:mq 52s linear infinite}
+.marquee:hover .marquee-track,.marquee:focus-within .marquee-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mq-set{display:flex;gap:24px;padding-right:24px;flex:none}
+.mq-item{position:relative;flex:none;width:420px;border-radius:16px;overflow:hidden;background:#081830;border:1px solid var(--line-2);box-shadow:0 30px 60px rgba(0,0,0,.4);text-decoration:none;color:var(--text);transition:transform .35s ease,border-color .35s ease}
+.mq-item:hover{transform:translateY(-8px);border-color:var(--line-3);color:var(--text)}
+.mq-item img{display:block;width:100%;aspect-ratio:7/5;object-fit:contain;padding:14px;box-sizing:border-box}
+.mq-cap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-top:1px solid var(--line-2)}
+.mq-cap b{font-size:15px;font-weight:600}
+.mq-cap span{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+
+/* ---------- 3 · bento grid + watermark numerals ---------- */
+.bento{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.bento>.card:nth-child(1),.bento>.card:nth-child(3){grid-column:1/3}
+.bento>.card:nth-child(2){grid-column:3;grid-row:1/3}
+.bento>.card:nth-child(1) .demo,.bento>.card:nth-child(3) .demo{height:230px}
+.bento>.card:nth-child(2) .demo{flex:1;height:auto;min-height:340px}
+.sec-head,.svc-block .split>div:first-child{position:relative}
+.svc-block .wrap{position:relative;z-index:1}
+[data-num]::before{content:attr(data-num);position:absolute;left:-18px;top:-100px;z-index:-1;font-family:var(--sans);font-size:220px;line-height:1;font-weight:700;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(230,237,243,.26);opacity:.5;pointer-events:none;user-select:none}
+.band-light [data-num]::before{-webkit-text-stroke-color:rgba(4,8,20,.3)}
+.member{position:relative;transition:border-color .3s ease}
+.member img{aspect-ratio:4/5;filter:grayscale(.35);transition:filter .5s ease,transform .7s ease}
+.member:hover{border-color:var(--line-3)}
+.member:hover img{filter:none;transform:scale(1.03)}
+
+/* ---------- 4 · cursor glow on cards ---------- */
+.card,.pcard,.member,.mq-item{--mx:50%;--my:50%}
+.pcard{position:relative}
+.card::after,.pcard::after,.member::after,.mq-item::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(280px circle at var(--mx) var(--my),rgba(56,189,248,.16),transparent 62%);opacity:0;transition:opacity .35s ease;pointer-events:none;z-index:2}
+.card:hover::after,.pcard:hover::after,.member:hover::after,.mq-item:hover::after{opacity:1}
+
+@media (pointer: coarse){
+  .card::after,.pcard::after,.member::after,.mq-item::after{display:none}
+}
+@media (prefers-reduced-motion: reduce){
+  .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  .mq-tilt{width:auto;margin-left:0;transform:none}
+  .marquee-track{animation:none}
+  .member img,.mq-item{transition:none}
+}
+@media (max-width: 960px){
+  .bento{grid-template-columns:minmax(0,1fr)}
+  .bento>.card:nth-child(n){grid-column:auto;grid-row:auto}
+  .bento>.card:nth-child(n) .demo{height:200px;min-height:0;flex:none}
+  [data-num]::before{font-size:140px;top:-64px;left:-10px}
+}
+@media (max-width: 640px){
+  .band-light{padding:72px 0}
+  .marquee{padding:32px 0 48px}
+  .mq-item{width:280px}
+  .mq-set{gap:16px;padding-right:16px}
+  .marquee-track{animation-duration:34s}
+  [data-num]::before{font-size:110px;top:-52px}
+}
+.band-light .map{border-color:rgba(4,8,20,.14)}
+.band-light .map iframe{filter:none}
+.band-light .link-arrow{color:#0369A1;border-bottom-color:rgba(3,105,161,.4)}
+.band-light .link-arrow:hover{color:#040814}
